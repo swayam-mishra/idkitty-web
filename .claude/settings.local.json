@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(find d:ResourcesProjectsIDKittyIDKitty-web -not -path */node_modules/* -not -path */dist/* -type f)",
+      "Bash(sed -i \"s/''Space Mono, monospace''/''JetBrains Mono, monospace''/g\" src/components/ChallengeModal.jsx src/components/IdentityCard.jsx src/components/Loader.jsx src/components/NavBar.jsx src/components/StatusBadge.jsx src/pages/CreateIdentity.jsx src/pages/Dashboard.jsx src/pages/DemoService.jsx src/pages/Landing.jsx src/pages/Login.jsx src/index.css)",
+      "Bash(sed -i \"s/''Space Mono'', monospace/''JetBrains Mono'', monospace/g\" src/index.css)",
+      "Bash(cp \"d:/Resources/Projects/IDKitty/IDKitty-web/src/assets/pixel/cursor.png\" \"d:/Resources/Projects/IDKitty/IDKitty-web/public/cursor.png\")",
+      "Bash(cp \"d:/Resources/Projects/IDKitty/IDKitty-web/src/assets/pixel/cursor-hover.png\" \"d:/Resources/Projects/IDKitty/IDKitty-web/public/cursor-hover.png\")",
+      "Bash(cp \"d:/Resources/Projects/IDKitty/IDKitty-web/src/assets/pixel/cursor-click.png\" \"d:/Resources/Projects/IDKitty/IDKitty-web/public/cursor-click.png\")",
+      "Bash(python3 -c \":*)",
+      "Bash(node -e \":*)"
+    ]
+  }
+}

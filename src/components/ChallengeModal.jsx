@@ -19,12 +19,12 @@ const ChallengeModal = ({ challenge, onSign, loading }) => {
     <div className="bounce-in" style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
       {/* Challenge terminal box */}
       <div className="terminal">
-        <div style={{ color: 'var(--white)', opacity: 0.6, marginBottom: '0.4rem' }}>
+        <div style={{ color: '#F5F3E7', opacity: 0.6, marginBottom: '0.4rem' }}>
           {'>'} Challenge issued:
         </div>
         <div
           style={{
-            color: 'var(--yellow)',
+            color: '#F5F3E7',
             fontWeight: 600,
             wordBreak: 'break-all',
             letterSpacing: '0.05em',
@@ -33,12 +33,12 @@ const ChallengeModal = ({ challenge, onSign, loading }) => {
         >
           {challenge}
         </div>
-        <div style={{ color: 'var(--white)', opacity: 0.6, marginBottom: '0.4rem' }}>
+        <div style={{ color: '#F5F3E7', opacity: 0.6, marginBottom: '0.4rem' }}>
           {'>'} Sign this string with your private key.
         </div>
         <div>
           {'>'}{' '}
-          <span style={{ color: seconds <= 10 ? 'var(--hot-pink)' : 'var(--white)', opacity: 0.7 }}>
+          <span style={{ color: seconds <= 10 ? '#E74B4A' : '#F5F3E7', opacity: 0.7 }}>
             Expires in: {seconds}s
           </span>
         </div>
@@ -48,11 +48,11 @@ const ChallengeModal = ({ challenge, onSign, loading }) => {
       <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
         <label
           style={{
-            fontFamily: 'IBM Plex Mono, monospace',
-            fontSize: '0.75rem',
+            fontFamily: 'JetBrains Mono, monospace',
+            fontSize: '0.625rem',
             textTransform: 'uppercase',
             letterSpacing: '0.1em',
-            color: 'var(--white)',
+            color: '#030404',
             opacity: 0.7,
           }}
         >
@@ -65,14 +65,14 @@ const ChallengeModal = ({ challenge, onSign, loading }) => {
           value={privateKey}
           onChange={e => setPrivateKey(e.target.value)}
         />
-        <span style={{ fontFamily: 'IBM Plex Mono, monospace', fontSize: '0.72rem', color: 'var(--hot-pink)' }}>
+        <span style={{ fontFamily: 'Pixelify Sans, sans-serif', fontSize: '1rem', color: '#E74B4A' }}>
           Stays in your browser. Never sent to the server.
         </span>
       </div>
 
       {/* Sign button */}
       <button
-        className="btn btn-danger"
+        className="btn btn-primary"
         onClick={handleSubmit}
         disabled={loading || !privateKey.trim() || seconds <= 0}
         style={{

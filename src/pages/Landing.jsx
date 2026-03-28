@@ -1,87 +1,62 @@
 import { useNavigate } from 'react-router-dom'
 import NavBar from '../components/NavBar'
-import CatLogo from '../components/CatLogo'
+import { PawIcon } from '../components/PixelCat'
+import logoImg from '../assets/pixel/logo.png'
 
-// Floating paw config — random positions + rotation + duration
-const PAW_CONFIGS = [
-  { left: '5%',  top: '80%', rot: '-15deg', dur: '22s', delay: '0s'   },
-  { left: '15%', top: '95%', rot: '20deg',  dur: '28s', delay: '-6s'  },
-  { left: '28%', top: '90%', rot: '-8deg',  dur: '19s', delay: '-12s' },
-  { left: '42%', top: '85%', rot: '35deg',  dur: '25s', delay: '-4s'  },
-  { left: '57%', top: '92%', rot: '-25deg', dur: '31s', delay: '-9s'  },
-  { left: '70%', top: '88%', rot: '12deg',  dur: '21s', delay: '-15s' },
-  { left: '82%', top: '96%', rot: '-40deg', dur: '27s', delay: '-2s'  },
-  { left: '93%', top: '83%', rot: '18deg',  dur: '23s', delay: '-18s' },
-]
-
-const HowItWorksCard = ({ number, title, description, shadowColor }) => (
-  <div
-    className="card"
-    style={{ boxShadow: `6px 6px 0px ${shadowColor}`, flex: 1, minWidth: 0 }}
-  >
+const HowItWorksCard = ({ number, title, description, accentColor }) => {
+  return (
     <div
+      className="card"
       style={{
-        fontFamily: 'IBM Plex Mono, monospace',
-        fontSize: '2.5rem',
-        fontWeight: 600,
-        color: shadowColor,
-        lineHeight: 1,
-        marginBottom: '0.75rem',
+        boxShadow: '6px 6px 0px #030404',
+        flex: 1,
+        minWidth: 0,
       }}
     >
-      {number}
+      <div
+        style={{
+          fontFamily: 'JetBrains Mono, monospace',
+          fontSize: '1.5rem',
+          color: accentColor,
+          lineHeight: 1,
+          marginBottom: '1rem',
+        }}
+      >
+        {number}
+      </div>
+      <h3
+        style={{
+          fontFamily: 'JetBrains Mono, monospace',
+          fontSize: '0.75rem',
+          textTransform: 'uppercase',
+          letterSpacing: '0.04em',
+          color: '#030404',
+          margin: '0 0 0.75rem',
+          lineHeight: 1.6,
+        }}
+      >
+        {title}
+      </h3>
+      <p
+        style={{
+          fontFamily: 'Pixelify Sans, sans-serif',
+          fontSize: '1.125rem',
+          color: '#21242B',
+          lineHeight: 1.5,
+          margin: 0,
+        }}
+      >
+        {description}
+      </p>
     </div>
-    <h3
-      style={{
-        fontFamily: 'Space Grotesk, sans-serif',
-        fontWeight: 700,
-        fontSize: '1.05rem',
-        textTransform: 'uppercase',
-        letterSpacing: '0.04em',
-        color: 'var(--white)',
-        margin: '0 0 0.5rem',
-      }}
-    >
-      {title}
-    </h3>
-    <p
-      style={{
-        fontFamily: 'IBM Plex Mono, monospace',
-        fontSize: '0.8rem',
-        color: 'var(--white)',
-        opacity: 0.65,
-        lineHeight: 1.6,
-        margin: 0,
-      }}
-    >
-      {description}
-    </p>
-  </div>
-)
+  )
+}
 
 const Landing = () => {
   const navigate = useNavigate()
 
   return (
-    <div className="page" style={{ position: 'relative', overflow: 'hidden' }}>
-      {/* Floating paw background */}
-      {PAW_CONFIGS.map((cfg, i) => (
-        <div
-          key={i}
-          className="bg-paw"
-          style={{
-            left: cfg.left,
-            top: cfg.top,
-            '--rot': cfg.rot,
-            '--dur': cfg.dur,
-            animationDelay: cfg.delay,
-            backgroundImage: "url('/paw-cursor.svg')",
-            backgroundSize: 'contain',
-            backgroundRepeat: 'no-repeat',
-          }}
-        />
-      ))}
-
+    <div className="page" style={{ position: 'relative' }}>
       <NavBar />
 
       {/* Hero */}
@@ -94,20 +69,18 @@ const Landing = () => {
           justifyContent: 'center',
           textAlign: 'center',
           padding: '4rem 1.5rem',
-          position: 'relative',
-          zIndex: 1,
         }}
       >
         <h1
           style={{
-            fontFamily: 'Space Grotesk, sans-serif',
-            fontWeight: 700,
-            fontSize: 'clamp(3rem, 9vw, 6rem)',
+            fontFamily: 'JetBrains Mono, monospace',
+            fontSize: '80px',
+            fontWeight: 800,
             textTransform: 'uppercase',
-            lineHeight: 1.0,
-            letterSpacing: '-0.02em',
-            color: 'var(--white)',
-            margin: '0 0 1.5rem',
+            lineHeight: 1.2,
+            letterSpacing: '-0.01em',
+            color: '#030404',
+            margin: '0',
           }}
         >
           YOUR IDENTITY.
@@ -117,12 +90,12 @@ const Landing = () => {
 
         <p
           style={{
-            fontFamily: 'IBM Plex Mono, monospace',
-            fontSize: 'clamp(0.9rem, 2vw, 1.1rem)',
-            color: 'var(--white)',
-            opacity: 0.65,
-            marginBottom: '2.5rem',
+            fontFamily: 'Pixelify Sans, sans-serif',
+            fontSize: '18px',
+            color: '#21242B',
+            margin: '24px 0 2.5rem',
             maxWidth: '500px',
+            lineHeight: 1.5,
           }}
         >
           No passwords. No databases. No breaches. Just you and your keys.
@@ -130,100 +103,93 @@ const Landing = () => {
 
         <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', justifyContent: 'center' }}>
           <button className="btn btn-primary" onClick={() => navigate('/create')}>
+            <PawIcon size={16} />
             CREATE IDENTITY →
           </button>
           <a href="#how-it-works" className="btn btn-ghost">
+            <PawIcon size={16} />
             LEARN HOW IT WORKS ↓
           </a>
         </div>
       </section>
 
-      {/* Stat strip */}
+      {/* Stat strip — marquee */}
       <div
         style={{
-          borderTop: '3px solid var(--white)',
-          borderBottom: '3px solid var(--white)',
-          background: 'var(--bg-raised)',
-          padding: '1.2rem 1.5rem',
-          position: 'relative',
-          zIndex: 1,
+          borderTop: '3px solid #030404',
+          borderBottom: '3px solid #030404',
+          background: '#030404',
+          padding: '1.2rem 0',
+          overflow: 'hidden',
         }}
       >
-        <div
-          className="container"
-          style={{
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            gap: '2rem',
-            flexWrap: 'wrap',
-            textAlign: 'center',
-          }}
-        >
-          {[
+        {(() => {
+          const stats = [
             '4.5B records breached in 2023',
-            '0 passwords stored',
-            'You own your keys. Always.',
-          ].map((stat, i) => (
-            <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '2rem' }}>
-              <span
-                style={{
-                  fontFamily: 'IBM Plex Mono, monospace',
-                  fontSize: '0.85rem',
-                  color: 'var(--white)',
-                  opacity: 0.85,
-                  letterSpacing: '0.03em',
-                }}
-              >
-                {stat}
-              </span>
-              {i < 2 && (
-                <span style={{ fontSize: '1.1rem', opacity: 0.5 }}>🐾</span>
-              )}
+            '0 passwords stored by IDKitty',
+            'Your keys. Always.',
+            '100% client-side key generation',
+            'Polygon Amoy — immutable identity',
+            'No server ever sees your private key',
+          ]
+          const StatList = ({ prefix }) => (
+            <>
+              {stats.map((s, i) => (
+                <span key={`${prefix}${i}`} style={{ display: 'inline-flex', alignItems: 'center' }}>
+                  <span style={{ fontFamily: 'Pixelify Sans, sans-serif', fontSize: '14px', color: '#F5F3E7', whiteSpace: 'nowrap' }}>{s}</span>
+                  <span style={{ padding: '0 32px', color: '#F5F3E7', opacity: 0.4 }}>·</span>
+                </span>
+              ))}
+            </>
+          )
+          return (
+            <div className="marquee-track">
+              <StatList prefix="a" />
+              <StatList prefix="b" />
             </div>
-          ))}
-        </div>
+          )
+        })()}
       </div>
 
       {/* How it works */}
       <section
         id="how-it-works"
-        style={{ padding: '5rem 1.5rem', position: 'relative', zIndex: 1 }}
+        style={{ padding: '5rem 1.5rem' }}
       >
         <div className="container">
           <h2
             style={{
-              fontFamily: 'Space Grotesk, sans-serif',
-              fontWeight: 700,
-              fontSize: 'clamp(1.5rem, 4vw, 2.2rem)',
+              fontFamily: 'JetBrains Mono, monospace',
+              fontSize: 'clamp(1rem, 2.5vw, 1.5rem)',
               textTransform: 'uppercase',
               letterSpacing: '-0.01em',
-              color: 'var(--white)',
+              color: '#030404',
               marginBottom: '2.5rem',
               textAlign: 'center',
+              lineHeight: 1.6,
             }}
           >
             How it works
           </h2>
 
-          <div style={{ display: 'flex', gap: '1.5rem', flexWrap: 'wrap' }}>
+          <div style={{ display: 'flex', gap: '1.5rem', flexWrap: 'wrap', overflow: 'visible' }}>
             <HowItWorksCard
               number="01"
               title="Generate Keys"
               description="Your browser generates a keypair. We never touch the private key. It never leaves your device."
-              shadowColor="var(--orange)"
+              accentColor="#25CFE6"
             />
             <HowItWorksCard
               number="02"
               title="Anchor on Chain"
               description="Your public key gets written to Polygon. Immutable. Verifiable. Yours forever."
-              shadowColor="var(--lavender)"
+              accentColor="#5EC374"
             />
             <HowItWorksCard
               number="03"
               title="Sign to Login"
               description="Prove you're you by signing a challenge. No password typed. No server touched. Just math."
-              shadowColor="var(--yellow)"
+              accentColor="#E74B4A"
             />
           </div>
         </div>
@@ -232,10 +198,9 @@ const Landing = () => {
       {/* Footer */}
       <footer
         style={{
-          borderTop: '3px solid var(--white)',
+          borderTop: '3px solid #030404',
           padding: '1.5rem',
-          position: 'relative',
-          zIndex: 1,
+          background: '#F5F3E7',
         }}
       >
         <div
@@ -249,13 +214,12 @@ const Landing = () => {
           }}
         >
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-            <CatLogo size={28} />
+            <img src={logoImg} width={28} height={28} alt="IDKitty" style={{ imageRendering: 'pixelated' }} />
             <span
               style={{
-                fontFamily: 'Space Grotesk, sans-serif',
-                fontWeight: 700,
-                fontSize: '1rem',
-                color: 'var(--white)',
+                fontFamily: 'JetBrains Mono, monospace',
+                fontSize: '0.75rem',
+                color: '#030404',
               }}
             >
               IDKitty
@@ -263,13 +227,16 @@ const Landing = () => {
           </div>
           <span
             style={{
-              fontFamily: 'IBM Plex Mono, monospace',
-              fontSize: '0.78rem',
-              color: 'var(--white)',
-              opacity: 0.4,
+              fontFamily: 'Pixelify Sans, sans-serif',
+              fontSize: '16px',
+              color: '#21242B',
             }}
           >
-            Built at hackathon with love and caffeine
+            built at <strong>HackOlympus</strong> by{' '}
+            <a href="https://x.com/swaayyam" target="_blank" rel="noopener noreferrer" style={{ color: '#25CFE6', textDecoration: 'none', fontWeight: 700 }}>@swaayyam</a>
+            {' '}&amp;{' '}
+            <a href="https://x.com/uutkarrsh" target="_blank" rel="noopener noreferrer" style={{ color: '#25CFE6', textDecoration: 'none', fontWeight: 700 }}>@uutkarrsh</a>
+            {' '}with <span style={{ color: '#FFA6C9' }}>♥</span>
           </span>
         </div>
       </footer>
