@@ -133,7 +133,7 @@ const CreateIdentity = () => {
   }
 
   return (
-    <div className="page">
+    <div className="page page-create">
       <NavBar />
       <div
         className="container"
@@ -172,8 +172,8 @@ const CreateIdentity = () => {
                   <div className="bounce-in" style={{ color: '#25CFE6', fontWeight: 600, marginBottom: '0.3rem' }}>
                     {'> DID:         '}{keyPair.did}
                   </div>
-                  <div style={{ color: '#5EC374', marginBottom: '0.3rem', wordBreak: 'break-all' }}>
-                    {'> Public Key:  '}{keyPair.publicKey.slice(0, 40)}...
+                  <div style={{ color: '#5EC374', marginBottom: '0.3rem', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                    {'> Public Key:  '}{keyPair.publicKey.slice(0, 6)}...{keyPair.publicKey.slice(-4)}
                   </div>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', flexWrap: 'wrap' }}>
                     <span style={{ color: '#E74B4A' }}>
@@ -194,7 +194,7 @@ const CreateIdentity = () => {
                       style={{ background: 'transparent', border: '2px solid #F5F3E7', color: '#F5F3E7', boxShadow: 'none' }}
                       onClick={() => copyToClipboard(keyPair.privateKey, 'privkey')}
                     >
-                      <Copy size={12} /> {copied === 'privkey' ? 'COPIED 🐾' : 'COPY'}
+                      <Copy size={12} /> {copied === 'privkey' ? 'COPIED' : 'COPY'}
                     </button>
                   </div>
                   {!revealedLines.includes(2) && (
@@ -211,9 +211,8 @@ const CreateIdentity = () => {
             {/* Warning */}
             {keyPair && (
               <div className="alert-pink" style={{ display: 'flex', gap: '0.6rem', alignItems: 'flex-start' }}>
-                <span style={{ fontSize: '1.2rem', flexShrink: 0 }}>🙀</span>
                 <span style={{ fontFamily: 'Pixelify Sans, sans-serif', fontSize: '1.125rem', lineHeight: 1.5, color: '#030404' }}>
-                  We never see your private key. Screenshot it. Write it down. Don&apos;t lose it.
+                  she&apos;ll never ask for your private key. neither will we. screenshot it. write it down. guard it with your life.
                 </span>
               </div>
             )}
@@ -224,7 +223,7 @@ const CreateIdentity = () => {
               style={{ alignSelf: 'flex-start', opacity: keyPair ? 1 : 0.4 }}
               onClick={() => setStep(2)}
             >
-              NEXT: CLAIM YOUR IDENTITY →
+              MAKE IT OFFICIAL →
             </button>
           </div>
         )}

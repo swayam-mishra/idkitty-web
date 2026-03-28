@@ -53,6 +53,10 @@ body {
 a, button, [role="button"] { cursor: url('/cursor-hover.png') 8 8, pointer; }
 *:active { cursor: url('/cursor-click.png') 8 8, auto; }
 
+/* No custom cursors on create page */
+.page-create * { cursor: auto !important; }
+.page-create a, .page-create button, .page-create [role="button"] { cursor: pointer !important; }
+
 /* Scrollbar */
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: #F5F3E7; }

@@ -1,6 +1,8 @@
+import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import NavBar from '../components/NavBar'
 import logoImg from '../assets/pixel/logo.png'
+import { getStats } from '../services/api'
 
 const HowItWorksCard = ({ number, title, description, accentColor }) => {
   return (
@@ -52,8 +54,58 @@ const HowItWorksCard = ({ number, title, description, accentColor }) => {
   )
 }
 
+const StatCard = ({ value, label, accentColor }) => (
+  <div
+    style={{
+      border: '3px solid #030404',
+      boxShadow: '4px 4px 0px #030404',
+      background: '#F5F3E7',
+      padding: '1.5rem 2rem',
+      flex: 1,
+      minWidth: '160px',
+      textAlign: 'center',
+    }}
+  >
+    <div
+      style={{
+        fontFamily: 'JetBrains Mono, monospace',
+        fontSize: 'clamp(2rem, 5vw, 3rem)',
+        fontWeight: 800,
+        color: accentColor,
+        lineHeight: 1,
+        marginBottom: '0.5rem',
+      }}
+    >
+      {value ?? '—'}
+    </div>
+    <div
+      style={{
+        fontFamily: 'Pixelify Sans, sans-serif',
+        fontSize: '0.875rem',
+        color: '#21242B',
+        textTransform: 'uppercase',
+        letterSpacing: '0.05em',
+      }}
+    >
+      {label}
+    </div>
+  </div>
+)
+
 const Landing = () => {
   const navigate = useNavigate()
+  const [stats, setStats] = useState(null)
+
+  useEffect(() => {
+    const fetchStats = () =>
+      getStats()
+        .then((res) => setStats(res.data.stats))
+        .catch(() => {})
+
+    fetchStats()
+    const interval = setInterval(fetchStats, 30000)
+    return () => clearInterval(interval)
+  }, [])
 
   return (
     <div className="page" style={{ position: 'relative' }}>
@@ -110,6 +162,17 @@ const Landing = () => {
           <a href="#how-it-works" className="btn btn-ghost">
             LEARN HOW IT WORKS ↓
           </a>
+        </div>
+      </section>
+
+      {/* Live stats */}
+      <section style={{ padding: '3rem 1.5rem', borderTop: '3px solid #030404' }}>
+        <div className="container">
+          <div style={{ display: 'flex', gap: '1.5rem', flexWrap: 'wrap', justifyContent: 'center' }}>
+            <StatCard value={stats?.totalIdentities} label="Identities created" accentColor="#25CFE6" />
+            <StatCard value={stats?.totalAuthentications} label="Authentications" accentColor="#5EC374" />
+            <StatCard value={stats?.activeChallenges} label="Active challenges" accentColor="#E74B4A" />
+          </div>
         </div>
       </section>
 

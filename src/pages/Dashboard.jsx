@@ -22,7 +22,7 @@ const Dashboard = () => {
   const handleCopyDid = () => {
     if (!identity) return
     navigator.clipboard.writeText(identity.did)
-    setCopyLabel('COPIED 🐾')
+    setCopyLabel('COPIED')
     setTimeout(() => setCopyLabel('COPY DID'), 1500)
   }
 
