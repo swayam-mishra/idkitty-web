@@ -1,10 +1,7 @@
-import { Link, useLocation } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import logoImg from '../assets/pixel/logo.png'
 
 const NavBar = () => {
-  const location = useLocation()
-  const isLanding = location.pathname === '/'
-  const howItWorksTarget = isLanding ? '#how-it-works' : '/#how-it-works'
 
   return (
     <nav
@@ -53,8 +50,8 @@ const NavBar = () => {
         </Link>
 
         {/* Right link */}
-        <a
-          href={howItWorksTarget}
+        <Link
+          to="/login"
           style={{
             fontFamily: 'JetBrains Mono, monospace',
             fontSize: '0.625rem',
@@ -69,8 +66,8 @@ const NavBar = () => {
           onMouseEnter={e => (e.target.style.borderBottomColor = '#25CFE6')}
           onMouseLeave={e => (e.target.style.borderBottomColor = 'transparent')}
         >
-          How it works
-        </a>
+          Login
+        </Link>
       </div>
     </nav>
   )
