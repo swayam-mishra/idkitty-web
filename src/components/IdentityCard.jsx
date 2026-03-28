@@ -1,142 +1,145 @@
 import { QRCodeSVG } from 'qrcode.react'
-import CatLogo from './CatLogo'
+import catAvatar from '../assets/pixel/cat-neutral.svg'
+import SafeImg from './SafeImg'
 import StatusBadge from './StatusBadge'
 
-const IdentityCard = ({ did, name, email, createdAt, txHash }) => {
+const IdentityCard = ({ did, name, email, createdAt }) => {
   const dateStr = createdAt
     ? new Date(createdAt).toISOString().split('T')[0]
     : '—'
 
   return (
     <div
-      className="card-yellow"
       style={{
-        aspectRatio: '2.5 / 1',
-        position: 'relative',
-        overflow: 'hidden',
-        padding: '1.5rem 2rem',
         display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'space-between',
+        border: '3px solid #030404',
+        boxShadow: '8px 8px 0px #030404',
+        overflow: 'hidden',
       }}
     >
-      {/* Top row */}
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-          <CatLogo size={22} />
+      {/* Left panel — dark, cat avatar (inverted for visibility on dark bg) */}
+      <div
+        style={{
+          flex: '0 0 40%',
+          background: '#030404',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          padding: '2rem 1.5rem',
+          borderRight: '3px solid #030404',
+        }}
+      >
+        <SafeImg
+          src={catAvatar}
+          alt="IDKitty avatar"
+          style={{
+            width: 80,
+            height: 80,
+            imageRendering: 'pixelated',
+            filter: 'brightness(0) invert(1)',
+          }}
+        />
+      </div>
+
+      {/* Right panel — cream, DID + QR */}
+      <div
+        style={{
+          flex: '1',
+          background: '#F5F3E7',
+          color: '#030404',
+          padding: '1.25rem 1.5rem',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'space-between',
+          gap: '0.75rem',
+        }}
+      >
+        {/* Header row */}
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <span
             style={{
-              fontFamily: 'Space Grotesk, sans-serif',
-              fontWeight: 700,
-              fontSize: '0.75rem',
-              letterSpacing: '0.12em',
+              fontFamily: 'JetBrains Mono, monospace',
+              fontSize: '0.5rem',
+              letterSpacing: '0.14em',
               textTransform: 'uppercase',
-              color: 'var(--white)',
+              color: '#21242B',
             }}
           >
             IDKITTY
           </span>
+          <StatusBadge status="ACTIVE" />
         </div>
-        <StatusBadge status="ACTIVE" />
-      </div>
 
-      {/* Center — DID + claims */}
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '0.3rem', padding: '0.25rem 0' }}>
-        {/* DID with whisker decoration */}
-        <div style={{ position: 'relative' }}>
-          {/* Whisker left */}
-          <div
-            style={{
-              position: 'absolute',
-              left: 0,
-              top: '50%',
-              width: '15%',
-              height: '2px',
-              background: 'var(--white)',
-              opacity: 0.15,
-              transform: 'translateY(-50%)',
-            }}
-          />
-          {/* DID */}
+        {/* DID */}
+        <div>
           <p
             style={{
-              fontFamily: 'IBM Plex Mono, monospace',
-              fontSize: 'clamp(0.65rem, 1.5vw, 0.95rem)',
-              color: 'var(--orange)',
-              fontWeight: 500,
-              margin: '0 18%',
-              textAlign: 'center',
-              wordBreak: 'break-all',
-              letterSpacing: '0.03em',
+              fontFamily: 'Pixelify Sans, sans-serif',
+              fontSize: 'clamp(0.9rem, 1.4vw, 1.125rem)',
+              color: '#030404',
+              fontWeight: 600,
+              margin: '0 0 0.35rem',
+              overflow: 'hidden',
+              textOverflow: 'ellipsis',
+              whiteSpace: 'nowrap',
+              letterSpacing: '0.02em',
             }}
           >
             {did}
           </p>
-          {/* Whisker right */}
-          <div
-            style={{
-              position: 'absolute',
-              right: 0,
-              top: '50%',
-              width: '15%',
-              height: '2px',
-              background: 'var(--white)',
-              opacity: 0.15,
-              transform: 'translateY(-50%)',
-            }}
-          />
+
+          {(name || email) && (
+            <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+              {name && (
+                <span
+                  style={{
+                    fontFamily: 'Pixelify Sans, sans-serif',
+                    fontSize: '1rem',
+                    color: '#21242B',
+                    opacity: 0.6,
+                  }}
+                >
+                  {name}
+                </span>
+              )}
+              {email && (
+                <span
+                  style={{
+                    fontFamily: 'Pixelify Sans, sans-serif',
+                    fontSize: '1rem',
+                    color: '#21242B',
+                    opacity: 0.6,
+                  }}
+                >
+                  {email}
+                </span>
+              )}
+            </div>
+          )}
         </div>
 
-        {/* Claims — directly below DID, muted */}
-        {(name || email) && (
-          <div style={{ display: 'flex', justifyContent: 'center', gap: '1.25rem' }}>
-            {name && (
-              <span
-                style={{
-                  fontFamily: 'IBM Plex Mono, monospace',
-                  fontSize: '0.7rem',
-                  color: '#666',
-                }}
-              >
-                {name}
-              </span>
-            )}
-            {email && (
-              <span
-                style={{
-                  fontFamily: 'IBM Plex Mono, monospace',
-                  fontSize: '0.7rem',
-                  color: '#666',
-                }}
-              >
-                {email}
-              </span>
-            )}
-          </div>
-        )}
-      </div>
+        {/* Footer row — date + QR */}
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end' }}>
+          <span
+            style={{
+              fontFamily: 'JetBrains Mono, monospace',
+              fontSize: '0.5rem',
+              color: '#21242B',
+              opacity: 0.5,
+              letterSpacing: '0.06em',
+            }}
+          >
+            SINCE {dateStr}
+          </span>
 
-      {/* Bottom row */}
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end' }}>
-        <span
-          style={{
-            fontFamily: 'IBM Plex Mono, monospace',
-            fontSize: '0.7rem',
-            color: 'var(--white)',
-            opacity: 0.45,
-            letterSpacing: '0.06em',
-          }}
-        >
-          SINCE {dateStr}
-        </span>
-
-        <QRCodeSVG
-          value={did || 'idkitty'}
-          size={72}
-          bgColor="transparent"
-          fgColor="#f5f0e8"
-          level="M"
-        />
+          <QRCodeSVG
+            value={did || 'idkitty'}
+            size={80}
+            bgColor="transparent"
+            fgColor="#030404"
+            level="M"
+          />
+        </div>
       </div>
     </div>
   )

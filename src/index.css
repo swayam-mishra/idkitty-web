@@ -5,40 +5,23 @@
 @tailwind utilities;
 
 /* ============================================
-   IDKitty — Design System
+   IDKitty — Design System (Light Pixel Theme)
    CSS Variables + Global Rules + Utility Classes
    ============================================ */
 
 :root {
-  /* Base */
-  --black:  #0a0a0a;
-  --white:  #f5f0e8;
+  /* Palette */
+  --white:       #F5F3E7;
+  --black:       #030404;
+  --grey:        #21242B;
+  --accent-blue: #25CFE6;
+  --success:     #5EC374;
+  --error:       #E74B4A;
+  --bg-terminal: #030404;
 
-  /* Brand */
-  --orange:   #FF6B2B;
-  --yellow:   #FFE500;
-  --lavender: #C084FC;
-
-  /* States */
-  --mint:           #00FF94;
-  --hot-pink:       #FF2D78;
-  --electric-blue:  #0066FF;
-
-  /* Backgrounds */
-  --bg:          #0a0a0a;
-  --bg-raised:   #141414;
-  --bg-terminal: #0d1117;
-
-  /* Shadows — hard offset, zero blur */
-  --shadow-orange:   6px 6px 0px #FF6B2B;
-  --shadow-yellow:   6px 6px 0px #FFE500;
-  --shadow-pink:     4px 4px 0px #FF2D78;
-  --shadow-lavender: 4px 4px 0px #C084FC;
-  --shadow-mint:     4px 4px 0px #00FF94;
-  --shadow-blue:     4px 4px 0px #0066FF;
-
-  /* Identity card shadow — extra prominent */
-  --shadow-card:     8px 8px 0px #FFE500;
+  /* Fonts */
+  --font-pixel: 'JetBrains Mono', monospace;
+  --font-mono:  'Pixelify Sans', sans-serif;
 }
 
 /* --- Global Reset --- */
@@ -50,36 +33,43 @@
 html, body {
   margin: 0;
   padding: 0;
-  background: var(--bg);
-  color: var(--white);
-  font-family: 'Space Grotesk', sans-serif;
-  -webkit-font-smoothing: antialiased;
+  background: #F5F3E7;
+  color: #030404;
+  font-family: 'Pixelify Sans', sans-serif;
+  font-size: 20px;
+  -webkit-font-smoothing: none;
+}
+
+body {
+  scroll-behavior: smooth;
 }
 
 #root {
   min-height: 100vh;
 }
 
-/* Custom paw cursors */
-* { cursor: url('/paw-cursor.svg') 8 8, auto; }
-a, button, [role="button"] { cursor: url('/paw-cursor-pointer.svg') 8 8, pointer; }
+/* Custom cursors */
+* { cursor: url('/cursor.png') 8 8, auto; }
+a, button, [role="button"] { cursor: url('/cursor-hover.png') 8 8, pointer; }
+*:active { cursor: url('/cursor-click.png') 8 8, auto; }
 
-/* --- Typography helpers --- */
-.font-grotesk { font-family: 'Space Grotesk', sans-serif; }
-.font-mono    { font-family: 'IBM Plex Mono', monospace; }
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #F5F3E7; }
+::-webkit-scrollbar-thumb { background: #030404; }
 
 /* --- Card --- */
 .card {
-  border: 3px solid var(--white);
-  box-shadow: var(--shadow-orange);
-  background: var(--bg-raised);
+  border: 3px solid #030404;
+  box-shadow: 4px 4px 0px #030404;
+  background: #F5F3E7;
   padding: 1.5rem;
 }
 
 .card-yellow {
-  border: 3px solid var(--white);
-  box-shadow: var(--shadow-card);
-  background: var(--bg-raised);
+  border: 3px solid #030404;
+  box-shadow: 4px 4px 0px #030404;
+  background: #F5F3E7;
   padding: 1.5rem;
 }
 
@@ -89,120 +79,133 @@ a, button, [role="button"] { cursor: url('/paw-cursor-pointer.svg') 8 8, pointer
   align-items: center;
   gap: 0.4rem;
   padding: 0.7rem 1.4rem;
-  font-family: 'Space Grotesk', sans-serif;
-  font-weight: 700;
-  font-size: 0.9rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 800;
+  font-size: 0.875rem;
   text-transform: uppercase;
-  letter-spacing: 0.06em;
-  border: 3px solid var(--white);
+  letter-spacing: 0.04em;
+  border: 3px solid #030404;
+  box-shadow: 4px 4px 0px #030404;
   transition: transform 0.08s ease, box-shadow 0.08s ease;
   white-space: nowrap;
   text-decoration: none;
 }
 
 .btn:hover {
-  transform: translate(4px, 4px);
-  box-shadow: 0px 0px 0px transparent !important;
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0px #030404 !important;
 }
 
 .btn:active {
-  transform: translate(5px, 5px);
+  transform: scale(0.97);
 }
 
 .btn-primary {
-  background: var(--orange);
-  color: var(--black);
-  box-shadow: var(--shadow-yellow);
+  background: #25CFE6;
+  color: #030404;
+  box-shadow: 4px 4px 0px #030404;
 }
 
 .btn-danger {
-  background: var(--orange);
-  color: var(--black);
-  box-shadow: var(--shadow-pink);
+  background: #E74B4A;
+  color: #F5F3E7;
+  box-shadow: 4px 4px 0px #030404;
 }
 
 .btn-ghost {
-  background: transparent;
-  color: var(--white);
-  box-shadow: var(--shadow-lavender);
+  background: #F5F3E7;
+  color: #030404;
+  box-shadow: 4px 4px 0px #030404;
 }
 
 .btn-ghost-yellow {
-  background: transparent;
-  color: var(--white);
-  box-shadow: var(--shadow-yellow);
+  background: #F5F3E7;
+  color: #030404;
+  box-shadow: 4px 4px 0px #030404;
 }
 
 .btn-ghost-mint {
-  background: transparent;
-  color: var(--mint);
-  border-color: var(--mint);
-  box-shadow: var(--shadow-mint);
+  background: #F5F3E7;
+  color: #5EC374;
+  border-color: #5EC374;
+  box-shadow: 4px 4px 0px #5EC374;
+}
+
+.btn-blue {
+  background: #25CFE6;
+  color: #030404;
+  border-color: #030404;
+  box-shadow: 4px 4px 0px #030404;
 }
 
 .btn-sm {
   padding: 0.4rem 0.9rem;
-  font-size: 0.75rem;
+  font-size: 0.625rem;
 }
 
 /* --- Input fields --- */
 .input-field {
   width: 100%;
   padding: 0.75rem 1rem;
-  border: 3px solid var(--white);
-  background: var(--bg-terminal);
-  color: var(--white);
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 0.9rem;
+  border: 3px solid #030404;
+  background: #F5F3E7;
+  color: #030404;
+  font-family: 'Pixelify Sans', sans-serif;
+  font-size: 1.125rem;
   outline: none;
-  transition: border-color 0.08s ease, box-shadow 0.08s ease;
+  transition: box-shadow 0.08s ease;
 }
 
 .input-field:focus {
-  border-color: var(--orange);
-  box-shadow: var(--shadow-orange);
+  box-shadow: 4px 4px 0px #25CFE6;
 }
 
 .input-field::placeholder {
-  color: rgba(245, 240, 232, 0.35);
+  color: #21242B;
+  opacity: 0.5;
 }
 
-/* --- Terminal box --- */
+/* --- Terminal box (stays dark) --- */
 .terminal {
-  background: var(--bg-terminal);
-  border: 3px solid var(--white);
+  background: #030404;
+  border: 3px solid #030404;
+  box-shadow: 6px 6px 0px #21242B;
   padding: 1.25rem 1.5rem;
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 0.85rem;
+  font-family: 'Pixelify Sans', sans-serif;
+  font-size: 1.125rem;
+  color: #F5F3E7;
   line-height: 1.8;
 }
 
 /* --- Alert / callout boxes --- */
 .alert-pink {
-  border: 3px solid var(--hot-pink);
-  background: rgba(255, 45, 120, 0.08);
+  border: 3px solid #E74B4A;
+  box-shadow: 4px 4px 0px #E74B4A;
+  background: #F5F3E7;
   padding: 1rem 1.25rem;
-  color: var(--white);
+  color: #030404;
 }
 
 .alert-mint {
-  border: 3px solid var(--mint);
-  background: rgba(0, 255, 148, 0.08);
+  border: 3px solid #5EC374;
+  box-shadow: 4px 4px 0px #5EC374;
+  background: #F5F3E7;
   padding: 1rem 1.25rem;
-  color: var(--white);
+  color: #030404;
 }
 
 .alert-yellow {
-  border: 3px solid var(--yellow);
-  background: rgba(255, 229, 0, 0.06);
+  border: 3px solid #030404;
+  box-shadow: 4px 4px 0px #030404;
+  background: #F5F3E7;
   padding: 1rem 1.25rem;
-  color: var(--white);
+  color: #030404;
 }
 
 /* --- Page layout --- */
 .page {
   min-height: 100vh;
-  background: var(--bg);
+  background: #F5F3E7;
 }
 
 .container {
@@ -211,37 +214,24 @@ a, button, [role="button"] { cursor: url('/paw-cursor-pointer.svg') 8 8, pointer
   padding: 0 1.5rem;
 }
 
-/* --- Divider --- */
-.divider {
-  border: none;
-  border-top: 3px solid var(--white);
-  margin: 0;
-  opacity: 0.15;
-}
-
-/* --- Mono text colors --- */
-.text-orange  { color: var(--orange); }
-.text-yellow  { color: var(--yellow); }
-.text-mint    { color: var(--mint); }
-.text-pink    { color: var(--hot-pink); }
-.text-lavender{ color: var(--lavender); }
-.text-muted   { color: rgba(245, 240, 232, 0.5); }
-
 /* --- Step progress bar --- */
 .step-block {
   flex: 1;
   height: 8px;
-  border: 2px solid var(--white);
-  background: transparent;
+  border: 2px solid #030404;
+  background: #F5F3E7;
   transition: background 0.2s;
 }
 
 .step-block.active {
-  background: var(--orange);
-  border-color: var(--orange);
+  background: #25CFE6;
+  border-color: #25CFE6;
 }
 
 .step-block.done {
-  background: var(--mint);
-  border-color: var(--mint);
+  background: #5EC374;
+  border-color: #5EC374;
 }
+
+/* --- Text helpers --- */
+.text-muted { color: #21242B; }

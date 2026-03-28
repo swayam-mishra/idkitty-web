@@ -2,14 +2,15 @@ import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Copy, Eye, EyeOff, Loader2, CheckCircle2, Circle } from 'lucide-react'
 import NavBar from '../components/NavBar'
+import { PawIcon } from '../components/PixelCat'
 import { generateKeyPair } from '../services/crypto'
 import { registerIdentity } from '../services/api'
 import { saveIdentity } from '../store/identity.store'
 
 // Terminal lines for the typewriter
 const TERMINAL_LINES = [
-  { text: '> Initializing IDKitty vault...', color: 'var(--yellow)' },
-  { text: '> Generating ECDSA keypair (P-256)...', color: 'var(--white)' },
+  { text: '> Initializing IDKitty vault...', color: '#F5F3E7' },
+  { text: '> Generating ECDSA keypair (P-256)...', color: '#F5F3E7' },
 ]
 
 const StepBar = ({ step }) => (
@@ -29,16 +30,16 @@ const StatusRow = ({ done, active, text }) => (
       display: 'flex',
       alignItems: 'center',
       gap: '0.75rem',
-      fontFamily: 'IBM Plex Mono, monospace',
-      fontSize: '0.88rem',
-      color: done ? 'var(--mint)' : active ? 'var(--orange)' : 'var(--white)',
+      fontFamily: 'Pixelify Sans, sans-serif',
+      fontSize: '1.125rem',
+      color: done ? '#5EC374' : active ? '#25CFE6' : '#030404',
       opacity: done || active ? 1 : 0.4,
     }}
   >
     {done ? (
-      <CheckCircle2 size={16} className="check-pop" style={{ color: 'var(--mint)', flexShrink: 0 }} />
+      <CheckCircle2 size={16} className="check-pop" style={{ color: '#5EC374', flexShrink: 0 }} />
     ) : active ? (
-      <Loader2 size={16} className="spin" style={{ color: 'var(--orange)', flexShrink: 0 }} />
+      <Loader2 size={16} className="spin" style={{ color: '#25CFE6', flexShrink: 0 }} />
     ) : (
       <Circle size={16} style={{ flexShrink: 0 }} />
     )}
@@ -64,21 +65,16 @@ const CreateIdentity = () => {
     let cancelled = false
 
     const run = async () => {
-      // Line 1
       await new Promise(r => setTimeout(r, 400))
       if (cancelled) return
       setRevealedLines([0])
 
-      // Line 2
       await new Promise(r => setTimeout(r, 900))
       if (cancelled) return
       setRevealedLines([0, 1])
 
-      // Generate
       const kp = await generateKeyPair()
       if (cancelled) return
-
-      // Show DID line
       setKeyPair(kp)
     }
 
@@ -99,11 +95,9 @@ const CreateIdentity = () => {
     setError(null)
     setStep(3)
 
-    // Step 0 active — "Keypair generated"
     setAnchorStep(0)
     await delay(800)
 
-    // Step 1 active — "Claims packaged"
     setAnchorStep(1)
     await delay(800)
 
@@ -118,9 +112,6 @@ const CreateIdentity = () => {
     }
     saveIdentity(identity)
 
-    // Step 2 active — "Writing to Polygon Amoy..."
-    // Fire the API call and a 2.5s minimum pause concurrently.
-    // Whichever finishes last wins — so the spinner never flashes past.
     setAnchorStep(2)
     const apiCall = registerIdentity(keyPair.did, keyPair.publicKey, claimsToSend)
       .then(res => ({ ok: true, data: res.data }))
@@ -128,7 +119,6 @@ const CreateIdentity = () => {
 
     const [result] = await Promise.all([apiCall, delay(2500)])
 
-    // Step 3 active — "Awaiting confirmation"
     setAnchorStep(3)
     await delay(800)
 
@@ -139,7 +129,6 @@ const CreateIdentity = () => {
       setError(result.error)
     }
 
-    // Step 4 — all done
     setAnchorStep(4)
     setLoading(false)
   }
@@ -158,12 +147,12 @@ const CreateIdentity = () => {
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
             <h2
               style={{
-                fontFamily: 'Space Grotesk, sans-serif',
-                fontWeight: 700,
-                fontSize: '1.6rem',
+                fontFamily: 'JetBrains Mono, monospace',
+                fontSize: '1rem',
                 textTransform: 'uppercase',
-                letterSpacing: '-0.01em',
+                lineHeight: 1.6,
                 margin: 0,
+                color: '#030404',
               }}
             >
               Generate Your Identity
@@ -181,14 +170,14 @@ const CreateIdentity = () => {
 
               {keyPair && (
                 <>
-                  <div className="bounce-in" style={{ color: 'var(--orange)', fontWeight: 600, marginBottom: '0.3rem' }}>
+                  <div className="bounce-in" style={{ color: '#25CFE6', fontWeight: 600, marginBottom: '0.3rem' }}>
                     {'> DID:         '}{keyPair.did}
                   </div>
-                  <div style={{ color: 'var(--mint)', marginBottom: '0.3rem', wordBreak: 'break-all' }}>
+                  <div style={{ color: '#5EC374', marginBottom: '0.3rem', wordBreak: 'break-all' }}>
                     {'> Public Key:  '}{keyPair.publicKey.slice(0, 40)}...
                   </div>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', flexWrap: 'wrap' }}>
-                    <span style={{ color: 'var(--hot-pink)' }}>
+                    <span style={{ color: '#E74B4A' }}>
                       {'> Private Key: '}
                       {showPrivateKey
                         ? keyPair.privateKey.slice(0, 32) + '...'
@@ -196,27 +185,27 @@ const CreateIdentity = () => {
                     </span>
                     <button
                       className="btn btn-sm"
-                      style={{ background: 'transparent', border: '2px solid var(--white)', color: 'var(--white)', boxShadow: 'none' }}
+                      style={{ background: 'transparent', border: '2px solid #F5F3E7', color: '#F5F3E7', boxShadow: 'none' }}
                       onClick={() => setShowPrivateKey(v => !v)}
                     >
                       {showPrivateKey ? <><EyeOff size={12} /> HIDE</> : <><Eye size={12} /> REVEAL</>}
                     </button>
                     <button
                       className="btn btn-sm"
-                      style={{ background: 'transparent', border: '2px solid var(--orange)', color: 'var(--orange)', boxShadow: 'none' }}
+                      style={{ background: 'transparent', border: '2px solid #F5F3E7', color: '#F5F3E7', boxShadow: 'none' }}
                       onClick={() => copyToClipboard(keyPair.privateKey, 'privkey')}
                     >
                       <Copy size={12} /> {copied === 'privkey' ? 'COPIED 🐾' : 'COPY'}
                     </button>
                   </div>
                   {!revealedLines.includes(2) && (
-                    <span className="terminal-cursor" style={{ color: 'var(--white)', opacity: 0.5 }}>█</span>
+                    <span className="terminal-cursor" style={{ color: '#F5F3E7', opacity: 0.5 }}>█</span>
                   )}
                 </>
               )}
 
               {!keyPair && (
-                <span className="terminal-cursor" style={{ color: 'var(--white)', opacity: 0.5 }}>█</span>
+                <span className="terminal-cursor" style={{ color: '#F5F3E7', opacity: 0.5 }}>█</span>
               )}
             </div>
 
@@ -224,7 +213,7 @@ const CreateIdentity = () => {
             {keyPair && (
               <div className="alert-pink" style={{ display: 'flex', gap: '0.6rem', alignItems: 'flex-start' }}>
                 <span style={{ fontSize: '1.2rem', flexShrink: 0 }}>🙀</span>
-                <span style={{ fontFamily: 'IBM Plex Mono, monospace', fontSize: '0.82rem', lineHeight: 1.6 }}>
+                <span style={{ fontFamily: 'Pixelify Sans, sans-serif', fontSize: '1.125rem', lineHeight: 1.5, color: '#030404' }}>
                   We never see your private key. Screenshot it. Write it down. Don&apos;t lose it.
                 </span>
               </div>
@@ -236,6 +225,7 @@ const CreateIdentity = () => {
               style={{ alignSelf: 'flex-start', opacity: keyPair ? 1 : 0.4 }}
               onClick={() => setStep(2)}
             >
+              <PawIcon size={15} />
               NEXT: CLAIM YOUR IDENTITY →
             </button>
           </div>
@@ -247,21 +237,22 @@ const CreateIdentity = () => {
             <div>
               <h2
                 style={{
-                  fontFamily: 'Space Grotesk, sans-serif',
-                  fontWeight: 700,
-                  fontSize: '1.6rem',
+                  fontFamily: 'JetBrains Mono, monospace',
+                  fontSize: '1rem',
                   textTransform: 'uppercase',
-                  margin: '0 0 0.25rem',
+                  margin: '0 0 0.5rem',
+                  lineHeight: 1.6,
+                  color: '#030404',
                 }}
               >
                 Add Your Claims
               </h2>
               <p
                 style={{
-                  fontFamily: 'IBM Plex Mono, monospace',
-                  fontSize: '0.78rem',
-                  color: 'var(--white)',
-                  opacity: 0.5,
+                  fontFamily: 'Pixelify Sans, sans-serif',
+                  fontSize: '1rem',
+                  color: '#21242B',
+                  opacity: 0.6,
                   margin: 0,
                   textTransform: 'uppercase',
                   letterSpacing: '0.08em',
@@ -273,7 +264,7 @@ const CreateIdentity = () => {
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
-                <label style={{ fontFamily: 'IBM Plex Mono, monospace', fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.1em', opacity: 0.7 }}>
+                <label style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '0.625rem', textTransform: 'uppercase', letterSpacing: '0.1em', opacity: 0.7, color: '#030404' }}>
                   Name
                 </label>
                 <input
@@ -285,7 +276,7 @@ const CreateIdentity = () => {
                 />
               </div>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
-                <label style={{ fontFamily: 'IBM Plex Mono, monospace', fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.1em', opacity: 0.7 }}>
+                <label style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '0.625rem', textTransform: 'uppercase', letterSpacing: '0.1em', opacity: 0.7, color: '#030404' }}>
                   Email
                 </label>
                 <input
@@ -304,7 +295,7 @@ const CreateIdentity = () => {
                 disabled={loading}
                 onClick={() => handleRegister(false)}
               >
-                {loading ? <><Loader2 size={14} className="spin" /> Registering...</> : 'REGISTER IDENTITY →'}
+                {loading ? <><Loader2 size={14} className="spin" /> Registering...</> : <><PawIcon size={15} /> REGISTER IDENTITY →</>}
               </button>
               <button
                 className="btn btn-ghost"
@@ -322,11 +313,12 @@ const CreateIdentity = () => {
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
             <h2
               style={{
-                fontFamily: 'Space Grotesk, sans-serif',
-                fontWeight: 700,
-                fontSize: '1.6rem',
+                fontFamily: 'JetBrains Mono, monospace',
+                fontSize: '1rem',
                 textTransform: 'uppercase',
                 margin: 0,
+                lineHeight: 1.6,
+                color: '#030404',
               }}
             >
               Anchoring Identity
@@ -348,16 +340,16 @@ const CreateIdentity = () => {
                     target="_blank"
                     rel="noreferrer"
                     style={{
-                      fontFamily: 'IBM Plex Mono, monospace',
-                      fontSize: '0.82rem',
-                      color: 'var(--orange)',
+                      fontFamily: 'Pixelify Sans, sans-serif',
+                      fontSize: '1rem',
+                      color: '#25CFE6',
                       textDecoration: 'underline',
                     }}
                   >
                     TX: {txHash.slice(0, 20)}... → Polygonscan ↗
                   </a>
                 ) : error ? (
-                  <div className="alert-pink" style={{ fontFamily: 'IBM Plex Mono, monospace', fontSize: '0.8rem' }}>
+                  <div className="alert-pink" style={{ fontFamily: 'Pixelify Sans, sans-serif', fontSize: '1rem' }}>
                     {error}
                   </div>
                 ) : null}

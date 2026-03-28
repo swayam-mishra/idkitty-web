@@ -65,11 +65,11 @@ const Login = () => {
         {/* Page label */}
         <p
           style={{
-            fontFamily: 'IBM Plex Mono, monospace',
-            fontSize: '0.72rem',
+            fontFamily: 'JetBrains Mono, monospace',
+            fontSize: '0.5rem',
             textTransform: 'uppercase',
             letterSpacing: '0.12em',
-            color: 'var(--orange)',
+            color: '#25CFE6',
             marginBottom: '1rem',
           }}
         >
@@ -78,11 +78,12 @@ const Login = () => {
 
         <h2
           style={{
-            fontFamily: 'Space Grotesk, sans-serif',
-            fontWeight: 700,
-            fontSize: '1.6rem',
+            fontFamily: 'JetBrains Mono, monospace',
+            fontSize: '1rem',
             textTransform: 'uppercase',
             margin: '0 0 2rem',
+            lineHeight: 1.6,
+            color: '#030404',
           }}
         >
           Authenticate
@@ -93,11 +94,12 @@ const Login = () => {
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', marginBottom: '1.5rem' }}>
             <label
               style={{
-                fontFamily: 'IBM Plex Mono, monospace',
-                fontSize: '0.75rem',
+                fontFamily: 'JetBrains Mono, monospace',
+                fontSize: '0.625rem',
                 textTransform: 'uppercase',
                 letterSpacing: '0.1em',
                 opacity: 0.7,
+                color: '#030404',
               }}
             >
               YOUR DID
@@ -112,7 +114,7 @@ const Login = () => {
             />
 
             <button
-              className="btn btn-primary"
+              className="btn btn-blue"
               style={{ alignSelf: 'flex-start', marginTop: '0.25rem' }}
               disabled={loading || !did.trim()}
               onClick={handleRequestChallenge}
@@ -126,7 +128,7 @@ const Login = () => {
 
         {/* Error */}
         {error && (
-          <div className="alert-pink" style={{ marginBottom: '1.5rem', fontFamily: 'IBM Plex Mono, monospace', fontSize: '0.82rem' }}>
+          <div className="alert-pink" style={{ marginBottom: '1.5rem', fontFamily: 'Pixelify Sans, sans-serif', fontSize: '1rem' }}>
             {error}
           </div>
         )}
@@ -145,25 +147,24 @@ const Login = () => {
           <div className="alert-mint bounce-in" style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
             <div
               style={{
-                fontFamily: 'Space Grotesk, sans-serif',
-                fontWeight: 700,
-                fontSize: '1.2rem',
+                fontFamily: 'JetBrains Mono, monospace',
+                fontSize: '0.75rem',
                 textTransform: 'uppercase',
-                color: 'var(--mint)',
+                color: '#5EC374',
+                lineHeight: 1.6,
               }}
             >
               ✓ AUTHENTICATED
             </div>
-            <p style={{ fontFamily: 'IBM Plex Mono, monospace', fontSize: '0.82rem', margin: 0, opacity: 0.8 }}>
+            <p style={{ fontFamily: 'Pixelify Sans, sans-serif', fontSize: '1.125rem', margin: 0, color: '#21242B' }}>
               No password. No collar. Just your keys.
             </p>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', flexWrap: 'wrap' }}>
               <span
                 style={{
-                  fontFamily: 'IBM Plex Mono, monospace',
-                  fontSize: '0.78rem',
-                  color: 'var(--white)',
-                  opacity: 0.6,
+                  fontFamily: 'Pixelify Sans, sans-serif',
+                  fontSize: '1rem',
+                  color: '#21242B',
                   wordBreak: 'break-all',
                 }}
               >
@@ -191,16 +192,16 @@ const Login = () => {
           <div className="alert-pink bounce-in" style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
             <div
               style={{
-                fontFamily: 'Space Grotesk, sans-serif',
-                fontWeight: 700,
-                fontSize: '1.1rem',
+                fontFamily: 'JetBrains Mono, monospace',
+                fontSize: '0.75rem',
                 textTransform: 'uppercase',
-                color: 'var(--hot-pink)',
+                color: '#E74B4A',
+                lineHeight: 1.6,
               }}
             >
               ✗ INVALID SIGNATURE
             </div>
-            <p style={{ fontFamily: 'IBM Plex Mono, monospace', fontSize: '0.82rem', margin: 0, opacity: 0.8 }}>
+            <p style={{ fontFamily: 'Pixelify Sans, sans-serif', fontSize: '1.125rem', margin: 0, color: '#21242B' }}>
               Even cats check their keys.
             </p>
             <button

@@ -4,19 +4,16 @@ export default {
   theme: {
     extend: {
       colors: {
-        orange: '#FF6B2B',
-        yellow: '#FFE500',
-        lavender: '#C084FC',
-        mint: '#00FF94',
-        'hot-pink': '#FF2D78',
-        'electric-blue': '#0066FF',
-        bg: '#0a0a0a',
-        'bg-raised': '#141414',
-        'bg-terminal': '#0d1117',
+        white: '#F5F3E7',
+        black: '#030404',
+        grey: '#21242B',
+        'accent-blue': '#25CFE6',
+        success: '#5EC374',
+        error: '#E74B4A',
       },
       fontFamily: {
-        grotesk: ['Space Grotesk', 'sans-serif'],
-        mono: ['IBM Plex Mono', 'monospace'],
+        pixel: ['Press Start 2P', 'monospace'],
+        mono: ['VT323', 'monospace'],
       },
     },
   },

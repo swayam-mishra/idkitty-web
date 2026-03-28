@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Copy, ExternalLink, LogIn } from 'lucide-react'
 import NavBar from '../components/NavBar'
+import { PawIcon } from '../components/PixelCat'
 import IdentityCard from '../components/IdentityCard'
 import { loadIdentity } from '../store/identity.store'
 
@@ -39,12 +40,13 @@ const Dashboard = () => {
       <div className="container" style={{ padding: '3rem 1.5rem', maxWidth: '800px' }}>
         <h2
           style={{
-            fontFamily: 'Space Grotesk, sans-serif',
-            fontWeight: 700,
-            fontSize: '1.6rem',
+            fontFamily: 'JetBrains Mono, monospace',
+            fontSize: '1rem',
             textTransform: 'uppercase',
             letterSpacing: '-0.01em',
             marginBottom: '2rem',
+            lineHeight: 1.6,
+            color: '#030404',
           }}
         >
           Your Identity
@@ -72,7 +74,7 @@ const Dashboard = () => {
             className="btn btn-primary"
             onClick={() => navigate('/login')}
           >
-            <LogIn size={15} />
+            <PawIcon size={15} />
             TEST LOGIN
           </button>
 
@@ -99,11 +101,11 @@ const Dashboard = () => {
         <div className="alert-pink" style={{ marginTop: '2rem' }}>
           <p
             style={{
-              fontFamily: 'IBM Plex Mono, monospace',
-              fontSize: '0.82rem',
+              fontFamily: 'Pixelify Sans, sans-serif',
+              fontSize: '1.125rem',
               lineHeight: 1.7,
               margin: 0,
-              color: 'var(--white)',
+              color: '#030404',
             }}
           >
             Your private key lives only in your browser.
