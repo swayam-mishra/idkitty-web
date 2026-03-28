@@ -17,4 +17,6 @@ export const requestChallenge = (did) =>
 export const verifySignature = (did, signature) =>
   api.post('/api/auth/verify', { did, signature })
 
+export const getStats = () => api.get('/api/stats')
+
 export default api

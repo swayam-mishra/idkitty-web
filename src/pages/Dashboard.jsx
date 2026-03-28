@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Copy, ExternalLink, LogIn } from 'lucide-react'
 import NavBar from '../components/NavBar'
-import { PawIcon } from '../components/PixelCat'
 import IdentityCard from '../components/IdentityCard'
 import { loadIdentity } from '../store/identity.store'
 
@@ -23,7 +22,7 @@ const Dashboard = () => {
   const handleCopyDid = () => {
     if (!identity) return
     navigator.clipboard.writeText(identity.did)
-    setCopyLabel('COPIED 🐾')
+    setCopyLabel('COPIED')
     setTimeout(() => setCopyLabel('COPY DID'), 1500)
   }
 
@@ -74,7 +73,6 @@ const Dashboard = () => {
             className="btn btn-primary"
             onClick={() => navigate('/login')}
           >
-            <PawIcon size={15} />
             TEST LOGIN
           </button>
 

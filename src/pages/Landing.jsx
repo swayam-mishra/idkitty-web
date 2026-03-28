@@ -1,7 +1,8 @@
+import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import NavBar from '../components/NavBar'
-import { PawIcon } from '../components/PixelCat'
 import logoImg from '../assets/pixel/logo.png'
+import { getStats } from '../services/api'
 
 const HowItWorksCard = ({ number, title, description, accentColor }) => {
   return (
@@ -27,7 +28,8 @@ const HowItWorksCard = ({ number, title, description, accentColor }) => {
       <h3
         style={{
           fontFamily: 'JetBrains Mono, monospace',
-          fontSize: '0.75rem',
+          fontSize: '0.875rem',
+          fontWeight: 700,
           textTransform: 'uppercase',
           letterSpacing: '0.04em',
           color: '#030404',
@@ -52,8 +54,58 @@ const HowItWorksCard = ({ number, title, description, accentColor }) => {
   )
 }
 
+const StatCard = ({ value, label, accentColor }) => (
+  <div
+    style={{
+      border: '3px solid #030404',
+      boxShadow: '4px 4px 0px #030404',
+      background: '#F5F3E7',
+      padding: '1.5rem 2rem',
+      flex: 1,
+      minWidth: '160px',
+      textAlign: 'center',
+    }}
+  >
+    <div
+      style={{
+        fontFamily: 'JetBrains Mono, monospace',
+        fontSize: 'clamp(2rem, 5vw, 3rem)',
+        fontWeight: 800,
+        color: accentColor,
+        lineHeight: 1,
+        marginBottom: '0.5rem',
+      }}
+    >
+      {value ?? '—'}
+    </div>
+    <div
+      style={{
+        fontFamily: 'Pixelify Sans, sans-serif',
+        fontSize: '0.875rem',
+        color: '#21242B',
+        textTransform: 'uppercase',
+        letterSpacing: '0.05em',
+      }}
+    >
+      {label}
+    </div>
+  </div>
+)
+
 const Landing = () => {
   const navigate = useNavigate()
+  const [stats, setStats] = useState(null)
+
+  useEffect(() => {
+    const fetchStats = () =>
+      getStats()
+        .then((res) => setStats(res.data.stats))
+        .catch(() => {})
+
+    fetchStats()
+    const interval = setInterval(fetchStats, 30000)
+    return () => clearInterval(interval)
+  }, [])
 
   return (
     <div className="page" style={{ position: 'relative' }}>
@@ -98,18 +150,29 @@ const Landing = () => {
             lineHeight: 1.5,
           }}
         >
-          No passwords. No databases. No breaches. Just you and your keys.
+          No passwords. No databases. No breaches.
+          <br />
+          Just you and your keys.
         </p>
 
         <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', justifyContent: 'center' }}>
           <button className="btn btn-primary" onClick={() => navigate('/create')}>
-            <PawIcon size={16} />
             CREATE IDENTITY →
           </button>
           <a href="#how-it-works" className="btn btn-ghost">
-            <PawIcon size={16} />
             LEARN HOW IT WORKS ↓
           </a>
+        </div>
+      </section>
+
+      {/* Live stats */}
+      <section style={{ padding: '3rem 1.5rem', borderTop: '3px solid #030404' }}>
+        <div className="container">
+          <div style={{ display: 'flex', gap: '1.5rem', flexWrap: 'wrap', justifyContent: 'center' }}>
+            <StatCard value={stats?.totalIdentities} label="Identities created" accentColor="#25CFE6" />
+            <StatCard value={stats?.totalAuthentications} label="Authentications" accentColor="#5EC374" />
+            <StatCard value={stats?.activeChallenges} label="Active challenges" accentColor="#E74B4A" />
+          </div>
         </div>
       </section>
 
@@ -161,6 +224,7 @@ const Landing = () => {
             style={{
               fontFamily: 'JetBrains Mono, monospace',
               fontSize: 'clamp(1rem, 2.5vw, 1.5rem)',
+              fontWeight: 800,
               textTransform: 'uppercase',
               letterSpacing: '-0.01em',
               color: '#030404',
@@ -213,7 +277,7 @@ const Landing = () => {
             gap: '1rem',
           }}
         >
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
             <img src={logoImg} width={28} height={28} alt="IDKitty" style={{ imageRendering: 'pixelated' }} />
             <span
               style={{
@@ -224,19 +288,42 @@ const Landing = () => {
             >
               IDKitty
             </span>
+            <a
+              href="mailto:getidkitty@gmail.com"
+              style={{ color: '#030404', display: 'flex', alignItems: 'center' }}
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="2" y="4" width="20" height="16" rx="2" />
+                <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+              </svg>
+            </a>
+            <a
+              href="https://x.com/getidkitty"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ color: '#030404', display: 'flex', alignItems: 'center' }}
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.253 5.622 5.911-5.622Zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+              </svg>
+            </a>
           </div>
           <span
             style={{
-              fontFamily: 'Pixelify Sans, sans-serif',
-              fontSize: '16px',
+              fontFamily: 'JetBrains Mono, monospace',
+              fontSize: '13px',
               color: '#21242B',
+              whiteSpace: 'nowrap',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '0.25rem',
             }}
           >
             built at <strong>HackOlympus</strong> by{' '}
             <a href="https://x.com/swaayyam" target="_blank" rel="noopener noreferrer" style={{ color: '#25CFE6', textDecoration: 'none', fontWeight: 700 }}>@swaayyam</a>
             {' '}&amp;{' '}
             <a href="https://x.com/uutkarrsh" target="_blank" rel="noopener noreferrer" style={{ color: '#25CFE6', textDecoration: 'none', fontWeight: 700 }}>@uutkarrsh</a>
-            {' '}with <span style={{ color: '#FFA6C9' }}>♥</span>
+            {' '}with <img src="/cursor-original.png" alt="" style={{ width: 18, height: 18, imageRendering: 'pixelated', verticalAlign: 'middle' }} />
           </span>
         </div>
       </footer>

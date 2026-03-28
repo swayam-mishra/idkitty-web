@@ -1,9 +1,15 @@
+import { useMemo } from 'react'
 import { QRCodeSVG } from 'qrcode.react'
-import catAvatar from '../assets/pixel/cat-neutral.svg'
 import SafeImg from './SafeImg'
 import StatusBadge from './StatusBadge'
 
+const PFP_COUNT = 8
+
 const IdentityCard = ({ did, name, email, createdAt }) => {
+  const catAvatar = useMemo(
+    () => `/pfp/${Math.floor(Math.random() * PFP_COUNT) + 1}.jpeg`,
+    []
+  )
   const dateStr = createdAt
     ? new Date(createdAt).toISOString().split('T')[0]
     : '—'
@@ -20,12 +26,12 @@ const IdentityCard = ({ did, name, email, createdAt }) => {
       {/* Left panel — dark, cat avatar (inverted for visibility on dark bg) */}
       <div
         style={{
-          flex: '0 0 40%',
+          flex: '0 0 25%',
           background: '#030404',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          padding: '2rem 1.5rem',
+          padding: '1rem',
           borderRight: '3px solid #030404',
         }}
       >
@@ -33,10 +39,10 @@ const IdentityCard = ({ did, name, email, createdAt }) => {
           src={catAvatar}
           alt="IDKitty avatar"
           style={{
-            width: 80,
-            height: 80,
-            imageRendering: 'pixelated',
-            filter: 'brightness(0) invert(1)',
+            width: '100%',
+            height: 160,
+            objectFit: 'cover',
+            border: '3px solid #F5F3E7',
           }}
         />
       </div>
