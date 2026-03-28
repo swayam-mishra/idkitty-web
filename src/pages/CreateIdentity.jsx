@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Copy, Eye, EyeOff, Loader2, CheckCircle2, Circle } from 'lucide-react'
 import NavBar from '../components/NavBar'
-import { PawIcon } from '../components/PixelCat'
 import { generateKeyPair } from '../services/crypto'
 import { registerIdentity } from '../services/api'
 import { saveIdentity } from '../store/identity.store'
@@ -225,7 +224,6 @@ const CreateIdentity = () => {
               style={{ alignSelf: 'flex-start', opacity: keyPair ? 1 : 0.4 }}
               onClick={() => setStep(2)}
             >
-              <PawIcon size={15} />
               NEXT: CLAIM YOUR IDENTITY →
             </button>
           </div>
@@ -295,7 +293,7 @@ const CreateIdentity = () => {
                 disabled={loading}
                 onClick={() => handleRegister(false)}
               >
-                {loading ? <><Loader2 size={14} className="spin" /> Registering...</> : <><PawIcon size={15} /> REGISTER IDENTITY →</>}
+                {loading ? <><Loader2 size={14} className="spin" /> Registering...</> : <>REGISTER IDENTITY →</>}
               </button>
               <button
                 className="btn btn-ghost"

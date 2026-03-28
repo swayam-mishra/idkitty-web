@@ -1,6 +1,5 @@
 import { useNavigate } from 'react-router-dom'
 import NavBar from '../components/NavBar'
-import { PawIcon } from '../components/PixelCat'
 import logoImg from '../assets/pixel/logo.png'
 
 const HowItWorksCard = ({ number, title, description, accentColor }) => {
@@ -27,7 +26,8 @@ const HowItWorksCard = ({ number, title, description, accentColor }) => {
       <h3
         style={{
           fontFamily: 'JetBrains Mono, monospace',
-          fontSize: '0.75rem',
+          fontSize: '0.875rem',
+          fontWeight: 700,
           textTransform: 'uppercase',
           letterSpacing: '0.04em',
           color: '#030404',
@@ -98,16 +98,16 @@ const Landing = () => {
             lineHeight: 1.5,
           }}
         >
-          No passwords. No databases. No breaches. Just you and your keys.
+          No passwords. No databases. No breaches.
+          <br />
+          Just you and your keys.
         </p>
 
         <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', justifyContent: 'center' }}>
           <button className="btn btn-primary" onClick={() => navigate('/create')}>
-            <PawIcon size={16} />
             CREATE IDENTITY →
           </button>
           <a href="#how-it-works" className="btn btn-ghost">
-            <PawIcon size={16} />
             LEARN HOW IT WORKS ↓
           </a>
         </div>
@@ -161,6 +161,7 @@ const Landing = () => {
             style={{
               fontFamily: 'JetBrains Mono, monospace',
               fontSize: 'clamp(1rem, 2.5vw, 1.5rem)',
+              fontWeight: 800,
               textTransform: 'uppercase',
               letterSpacing: '-0.01em',
               color: '#030404',
@@ -213,7 +214,7 @@ const Landing = () => {
             gap: '1rem',
           }}
         >
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
             <img src={logoImg} width={28} height={28} alt="IDKitty" style={{ imageRendering: 'pixelated' }} />
             <span
               style={{
@@ -224,19 +225,42 @@ const Landing = () => {
             >
               IDKitty
             </span>
+            <a
+              href="mailto:getidkitty@gmail.com"
+              style={{ color: '#030404', display: 'flex', alignItems: 'center' }}
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="2" y="4" width="20" height="16" rx="2" />
+                <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+              </svg>
+            </a>
+            <a
+              href="https://x.com/getidkitty"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ color: '#030404', display: 'flex', alignItems: 'center' }}
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.253 5.622 5.911-5.622Zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+              </svg>
+            </a>
           </div>
           <span
             style={{
-              fontFamily: 'Pixelify Sans, sans-serif',
-              fontSize: '16px',
+              fontFamily: 'JetBrains Mono, monospace',
+              fontSize: '13px',
               color: '#21242B',
+              whiteSpace: 'nowrap',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '0.25rem',
             }}
           >
             built at <strong>HackOlympus</strong> by{' '}
             <a href="https://x.com/swaayyam" target="_blank" rel="noopener noreferrer" style={{ color: '#25CFE6', textDecoration: 'none', fontWeight: 700 }}>@swaayyam</a>
             {' '}&amp;{' '}
             <a href="https://x.com/uutkarrsh" target="_blank" rel="noopener noreferrer" style={{ color: '#25CFE6', textDecoration: 'none', fontWeight: 700 }}>@uutkarrsh</a>
-            {' '}with <span style={{ color: '#FFA6C9' }}>♥</span>
+            {' '}with <img src="/cursor-original.png" alt="" style={{ width: 18, height: 18, imageRendering: 'pixelated', verticalAlign: 'middle' }} />
           </span>
         </div>
       </footer>
