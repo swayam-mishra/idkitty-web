@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { LogOut, ShieldCheck, TrendingUp, Activity, Star } from 'lucide-react'
-import catAvatar from '../assets/pixel/cat-neutral.svg'
-import SafeImg from '../components/SafeImg'
+import logoImg from '../assets/pixel/logo.png'
 import StatusBadge from '../components/StatusBadge'
 import { loadJWT, clearJWT, loadIdentity } from '../store/identity.store'
 
@@ -69,9 +68,12 @@ const DemoService = () => {
             fontFamily: 'JetBrains Mono, monospace',
             fontSize: '0.875rem',
             color: '#030404',
+            display: 'flex',
+            alignItems: 'center',
           }}
         >
-          🏦 PURRBANK
+          <img src={logoImg} alt="IDKitty" style={{ width: 24, height: 24, imageRendering: 'pixelated', marginRight: '0.5rem' }} />
+          PURRBANK
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
           <span
@@ -84,7 +86,7 @@ const DemoService = () => {
           >
             Secured by
           </span>
-          <SafeImg src={catAvatar} alt="" style={{ width: 20, height: 20, imageRendering: 'pixelated' }} />
+          <img src={logoImg} alt="IDKitty" style={{ width: 20, height: 20, imageRendering: 'pixelated' }} />
           <span style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '0.625rem', color: '#21242B' }}>
             IDKitty
           </span>
