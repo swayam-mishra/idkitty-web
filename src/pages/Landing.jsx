@@ -288,6 +288,16 @@ const Landing = () => {
             >
               IDKitty
             </span>
+            <span
+              style={{
+                fontFamily: 'JetBrains Mono, monospace',
+                fontSize: '0.65rem',
+                color: '#21242B',
+                opacity: 0.5,
+              }}
+            >
+              v1.0.0
+            </span>
             <a
               href="mailto:getidkitty@gmail.com"
               style={{ color: '#030404', display: 'flex', alignItems: 'center' }}
