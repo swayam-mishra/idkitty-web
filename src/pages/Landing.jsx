@@ -320,7 +320,7 @@ const Landing = () => {
             }}
           >
             built at <strong>HackOlympus</strong> by{' '}
-            <a href="https://x.com/swaayyam" target="_blank" rel="noopener noreferrer" style={{ color: '#25CFE6', textDecoration: 'none', fontWeight: 700 }}>@swaayyam</a>
+            <a href="https://x.com/swayyaam" target="_blank" rel="noopener noreferrer" style={{ color: '#25CFE6', textDecoration: 'none', fontWeight: 700 }}>@swayyaam</a>
             {' '}&amp;{' '}
             <a href="https://x.com/uutkarrsh" target="_blank" rel="noopener noreferrer" style={{ color: '#25CFE6', textDecoration: 'none', fontWeight: 700 }}>@uutkarrsh</a>
             {' '}with <img src="/cursor-original.png" alt="" style={{ width: 18, height: 18, imageRendering: 'pixelated', verticalAlign: 'middle' }} />
