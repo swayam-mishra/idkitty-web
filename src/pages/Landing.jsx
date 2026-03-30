@@ -296,7 +296,7 @@ const Landing = () => {
                 opacity: 0.5,
               }}
             >
-              v1.0.0
+              v{__APP_VERSION__}
             </span>
             <a
               href="mailto:getidkitty@gmail.com"

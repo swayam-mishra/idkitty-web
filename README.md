@@ -82,3 +82,44 @@ Node.js + Express + MongoDB + Polygon smart contract. Handles DID registration, 
 ## The point
 
 4.5 billion records were breached in 2023. The problem isn't that people use weak passwords — it's that passwords exist at all. IDKitty is a proof of concept that you don't need them.
+
+---
+
+## Versioning & changelog
+
+This project uses [release-it](https://github.com/release-it/release-it) with [Conventional Commits](https://www.conventionalcommits.org/) to automate versioning and changelog generation. The version shown in the app footer is pulled from `package.json` at build time.
+
+### Commit message format
+
+```
+<type>: <short description>
+```
+
+| Type | When to use | Version bump |
+|---|---|---|
+| `feat` | New feature | Minor (1.1.0) |
+| `fix` | Bug fix | Patch (1.0.1) |
+| `chore` | Tooling, deps, config | No bump |
+| `docs` | Documentation only | No bump |
+| `refactor` | Code change, no feature/fix | No bump |
+| `BREAKING CHANGE` | Breaking API change | Major (2.0.0) |
+
+**Examples:**
+```bash
+git commit -m "feat: add QR code export to identity card"
+git commit -m "fix: challenge modal not closing on mobile"
+git commit -m "chore: update dependencies"
+```
+
+### Cutting a release
+
+```bash
+npm run release
+```
+
+This will:
+1. Analyze commits since the last tag
+2. Determine the version bump automatically
+3. Update `package.json` with the new version
+4. Generate/update `CHANGELOG.md`
+5. Create a git commit and tag (`vX.Y.Z`)
