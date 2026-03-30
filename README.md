@@ -4,7 +4,7 @@
 
 IDKitty is a decentralized digital identity system built for the web. No passwords. No centralized databases. No breaches. Just you, your keys, and math.
 
-Built at **HackOlympus** by [@swaayyam](https://x.com/swaayyam) & [@uutkarrsh](https://x.com/uutkarrsh).
+Built at **HackOlympus** by [@swaayyam](https://x.com/swayyaam) & [@uutkarrsh](https://x.com/uutkarrsh).
 
 ---
 
